@@ -1,185 +1,108 @@
 <!DOCTYPE html>
-<html lang="tr" class="dark h-full w-full overflow-hidden">
+<html lang="tr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Berkay Yılmaz — Portfolyo</title>
-  
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Lucide Icons CDN -->
+
+  <link rel="stylesheet" href="style.css">
   <script src="https://unpkg.com/lucide@latest"></script>
-  
-  <!-- Tailwind Özelleştirmeleri -->
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"SF Pro Text"', '"Inter"', 'sans-serif'],
-          },
-          colors: {
-            apple: {
-              bg: '#000000',
-              card: 'rgba(255, 255, 255, 0.03)',
-              cardHover: 'rgba(255, 255, 255, 0.07)',
-              border: 'rgba(255, 255, 255, 0.1)',
-              borderHover: 'rgba(255, 255, 255, 0.22)',
-              accent: '#2997ff',
-            }
-          }
-        }
-      }
-    }
-  </script>
-
-  <style>
-    /* Apple Geçiş Eğrisi */
-    .apple-ease {
-      transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    /* Akıcı Arka Plan Parlaması */
-    .mouse-glow {
-      background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(41, 151, 255, 0.08), transparent 40%);
-    }
-
-    /* Glassmorphism Efekti */
-    .glass-panel {
-      background: rgba(20, 20, 22, 0.65);
-      backdrop-filter: blur(40px) saturate(190%);
-      -webkit-backdrop-filter: blur(40px) saturate(190%);
-    }
-
-    ::-webkit-scrollbar { display: none; }
-    * { -ms-overflow-style: none; scrollbar-width: none; }
-  </style>
 </head>
-<body class="h-screen w-screen bg-black text-white font-sans antialiased selection:bg-apple-accent/30 selection:text-white relative overflow-hidden flex items-center justify-center">
 
-  <!-- Dinamik Fare İle Hareket Eden Işık Efekti -->
-  <div id="ambient-glow" class="pointer-events-none absolute inset-0 z-0 mouse-glow transition-opacity duration-1000 opacity-0"></div>
+<body>
 
-  <!-- Sabit Arka Plan Işık Küreleri -->
-  <div class="pointer-events-none absolute -top-40 -left-40 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[140px]"></div>
-  <div class="pointer-events-none absolute -bottom-40 -right-40 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[140px]"></div>
+  <div id="ambient-glow" class="mouse-glow"></div>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
 
-  <!-- ANA ARAYÜZ (Hero & Menü) -->
-  <main id="main-content" class="relative z-10 w-full max-w-4xl px-6">
-    
-    <!-- Başlık / Hero -->
-    <div class="text-center mb-10">
-      
-      <!-- Yuvarlak Profil Fotoğrafı -->
-      <div class="relative inline-block mb-5 group">
-        <div class="absolute -inset-1 bg-gradient-to-r from-apple-accent to-purple-600 rounded-full blur-md opacity-40 group-hover:opacity-80 transition duration-500"></div>
-        <img 
-          src="IMG_2430_2.jpg" 
-          alt="Berkay Yılmaz" 
-          class="relative w-28 h-28 md:w-32 md:h-32 rounded-full object-cover border-2 border-white/20 shadow-2xl mx-auto hover:scale-105 transition-transform duration-300 apple-ease"
-        >
+  <main class="container">
+
+    <header class="hero">
+
+      <div class="profile-wrapper">
+        <div class="profile-glow"></div>
+        <img src="manifestyaa.JPEG" alt="Berkay Yılmaz" class="profile-img">
       </div>
 
-      <div>
-        <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.05] border border-white/10 text-xs font-medium text-white/70 backdrop-blur-md mb-4 tracking-wide uppercase">
-          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          Geliştirici & Bilişim Öğrencisi
-        </span>
+      <div class="status-badge">
+        <span class="status-dot"></span>
+        Geliştirici & Bilişim Öğrencisi
       </div>
-      
-      <h1 class="text-4xl md:text-6xl font-semibold tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/50 mb-3">
-        Berkay Yılmaz
-      </h1>
-      
-      <p class="text-base md:text-lg text-white/50 font-normal max-w-xl mx-auto">
+
+      <h1 class="title">Berkay Yılmaz</h1>
+      <p class="subtitle">
         Donanım, yazılım ve yapay zeka araçlarıyla dijital deneyimler inşa ediyorum.
       </p>
-    </div>
 
-    <!-- Menü Kartları (Bento Grid) -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
-      
-      <!-- Hakkımda -->
-      <button onclick="openModal('about')" class="group relative p-5 md:p-6 rounded-3xl bg-apple-card border border-apple-border backdrop-blur-xl hover:bg-apple-cardHover hover:border-apple-borderHover hover:scale-[1.015] active:scale-[0.985] transition-all duration-300 apple-ease text-left flex items-center justify-between">
-        <div class="flex items-center space-x-4">
-          <div class="p-3.5 rounded-2xl bg-white/5 border border-white/10 group-hover:border-apple-accent/50 group-hover:bg-apple-accent/10 transition-colors duration-300">
-            <i data-lucide="user" class="w-6 h-6 text-white/80 group-hover:text-apple-accent transition-colors"></i>
-          </div>
-          <div>
-            <h2 class="text-lg font-medium text-white/90 group-hover:text-white">Hakkımda</h2>
-            <p class="text-sm text-white/40 font-light">Vizyonum ve çalışma tutkum</p>
+    </header>
+
+    <section class="grid">
+
+      <button onclick="openModal('about')" class="card">
+        <div class="card-left">
+          <div class="icon-box"><i data-lucide="user"></i></div>
+          <div class="card-text">
+            <h2>Hakkımda</h2>
+            <p>Vizyonum ve çalışma tutkum</p>
           </div>
         </div>
-        <i data-lucide="chevron-right" class="w-5 h-5 text-white/20 group-hover:text-white/60 group-hover:translate-x-1 transition-all"></i>
+        <i data-lucide="chevron-right" class="arrow-icon"></i>
       </button>
 
-      <!-- Yetenekler & İlgi Alanları -->
-      <button onclick="openModal('skills')" class="group relative p-5 md:p-6 rounded-3xl bg-apple-card border border-apple-border backdrop-blur-xl hover:bg-apple-cardHover hover:border-apple-borderHover hover:scale-[1.015] active:scale-[0.985] transition-all duration-300 apple-ease text-left flex items-center justify-between">
-        <div class="flex items-center space-x-4">
-          <div class="p-3.5 rounded-2xl bg-white/5 border border-white/10 group-hover:border-apple-accent/50 group-hover:bg-apple-accent/10 transition-colors duration-300">
-            <i data-lucide="cpu" class="w-6 h-6 text-white/80 group-hover:text-apple-accent transition-colors"></i>
-          </div>
-          <div>
-            <h2 class="text-lg font-medium text-white/90 group-hover:text-white">Yetenekler & İlgi Alanları</h2>
-            <p class="text-sm text-white/40 font-light">Yazılım, PC donanımı & AI</p>
+      <button onclick="openModal('skills')" class="card">
+        <div class="card-left">
+          <div class="icon-box"><i data-lucide="cpu"></i></div>
+          <div class="card-text">
+            <h2>Yetenekler</h2>
+            <p>Yazılım, PC & AI</p>
           </div>
         </div>
-        <i data-lucide="chevron-right" class="w-5 h-5 text-white/20 group-hover:text-white/60 group-hover:translate-x-1 transition-all"></i>
+        <i data-lucide="chevron-right" class="arrow-icon"></i>
       </button>
 
-      <!-- Eğitim -->
-      <button onclick="openModal('school')" class="group relative p-5 md:p-6 rounded-3xl bg-apple-card border border-apple-border backdrop-blur-xl hover:bg-apple-cardHover hover:border-apple-borderHover hover:scale-[1.015] active:scale-[0.985] transition-all duration-300 apple-ease text-left flex items-center justify-between">
-        <div class="flex items-center space-x-4">
-          <div class="p-3.5 rounded-2xl bg-white/5 border border-white/10 group-hover:border-apple-accent/50 group-hover:bg-apple-accent/10 transition-colors duration-300">
-            <i data-lucide="graduation-cap" class="w-6 h-6 text-white/80 group-hover:text-apple-accent transition-colors"></i>
-          </div>
-          <div>
-            <h2 class="text-lg font-medium text-white/90 group-hover:text-white">Eğitim</h2>
-            <p class="text-sm text-white/40 font-light">11. Sınıf Bilişim Teknolojileri</p>
+      <button onclick="openModal('school')" class="card">
+        <div class="card-left">
+          <div class="icon-box"><i data-lucide="graduation-cap"></i></div>
+          <div class="card-text">
+            <h2>Eğitim</h2>
+            <p>11. Sınıf Bilişim</p>
           </div>
         </div>
-        <i data-lucide="chevron-right" class="w-5 h-5 text-white/20 group-hover:text-white/60 group-hover:translate-x-1 transition-all"></i>
+        <i data-lucide="chevron-right" class="arrow-icon"></i>
       </button>
 
-      <!-- İletişim -->
-      <button onclick="openModal('contact')" class="group relative p-5 md:p-6 rounded-3xl bg-apple-card border border-apple-border backdrop-blur-xl hover:bg-apple-cardHover hover:border-apple-borderHover hover:scale-[1.015] active:scale-[0.985] transition-all duration-300 apple-ease text-left flex items-center justify-between">
-        <div class="flex items-center space-x-4">
-          <div class="p-3.5 rounded-2xl bg-white/5 border border-white/10 group-hover:border-apple-accent/50 group-hover:bg-apple-accent/10 transition-colors duration-300">
-            <i data-lucide="phone" class="w-6 h-6 text-white/80 group-hover:text-apple-accent transition-colors"></i>
-          </div>
-          <div>
-            <h2 class="text-lg font-medium text-white/90 group-hover:text-white">İletişim</h2>
-            <p class="text-sm text-white/40 font-light">Doğrudan bağlantı kurun</p>
+      <button onclick="openModal('contact')" class="card">
+        <div class="card-left">
+          <div class="icon-box"><i data-lucide="phone"></i></div>
+          <div class="card-text">
+            <h2>İletişim</h2>
+            <p>Doğrudan bağlantı</p>
           </div>
         </div>
-        <i data-lucide="chevron-right" class="w-5 h-5 text-white/20 group-hover:text-white/60 group-hover:translate-x-1 transition-all"></i>
+        <i data-lucide="chevron-right" class="arrow-icon"></i>
       </button>
 
-    </div>
+    </section>
   </main>
 
-  <!-- MODAL PANALİ (Apple Glass Overlay) -->
-  <div id="modal-overlay" class="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-6 bg-black/60 backdrop-blur-2xl opacity-0 pointer-events-none transition-all duration-500 apple-ease">
-    <div id="modal-card" class="relative w-full max-w-xl glass-panel border border-white/15 p-8 md:p-10 rounded-3xl shadow-[0_20px_70px_rgba(0,0,0,0.8)] scale-90 opacity-0 transition-all duration-500 apple-ease">
-      
-      <button onclick="closeModal()" class="absolute top-6 right-6 p-2 rounded-full bg-white/5 border border-white/10 hover:bg-white/15 text-white/60 hover:text-white transition-all">
-        <i data-lucide="x" class="w-5 h-5"></i>
+  <div id="modal-overlay" class="modal-overlay">
+    <div id="modal-card" class="modal-card">
+      <button onclick="closeModal()" class="close-btn">
+        <i data-lucide="x"></i>
       </button>
 
-      <div id="modal-header" class="flex items-center space-x-3 mb-6">
-        <div id="modal-icon-wrapper" class="p-3 rounded-2xl bg-apple-accent/10 border border-apple-accent/30 text-apple-accent"></div>
-        <h2 id="modal-title" class="text-2xl md:text-3xl font-semibold text-white tracking-tight"></h2>
+      <div class="modal-header">
+        <div id="modal-icon-wrapper" class="modal-icon"></div>
+        <h2 id="modal-title"></h2>
       </div>
 
-      <div id="modal-body" class="text-white/70 font-light leading-relaxed text-base md:text-lg"></div>
+      <div id="modal-body" class="modal-body"></div>
     </div>
   </div>
 
-  <!-- Toast Bildirim -->
-  <div id="toast" class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 px-5 py-2.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-xl text-sm text-white opacity-0 pointer-events-none transition-all duration-300 apple-ease flex items-center space-x-2">
-    <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
-    <span>Telefon numarası kopyalandı!</span>
+  <div id="toast" class="toast">
+    <i data-lucide="check-circle-2"></i>
+    <span>Kopyalandı!</span>
   </div>
 
   <script>
@@ -189,128 +112,52 @@
       about: {
         title: "Hakkımda",
         icon: "user",
-        body: `
-          <p class="mb-4">
-            Merhaba! Ben <strong class="text-white font-medium">Berkay Yılmaz</strong>. Teknolojinin mutfağında olmayı, sistem mimarilerini anlamayı ve yeni nesil yazılım yöntemleriyle üretmeyi seven bir bilişim tutkunuyum.
-          </p>
-          <p>
-            Yalnızca kod yazmakla kalmıyor; bilgisayar donanımlarının sınırlarını zorlamaktan, yapay zeka entegrasyonlu modern geliştirme süreçlerine (Vibe Coding) kadar geniş bir alanda kendimi sürekli geliştiriyorum.
-          </p>
-        `
+        body: `<p>Ben Berkay Yılmaz...</p>`
       },
       skills: {
-        title: "Yetenekler & İlgi Alanları",
+        title: "Yetenekler",
         icon: "cpu",
-        body: `
-          <div class="space-y-4">
-            <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/10">
-              <h3 class="text-white font-medium text-sm uppercase tracking-wider mb-2 text-apple-accent">Yazılım & Kodlama</h3>
-              <p class="text-sm text-white/60">Yazılım prensipleri, algoritmalar ve proje geliştirme süreçleri.</p>
-            </div>
-            
-            <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/10">
-              <h3 class="text-white font-medium text-sm uppercase tracking-wider mb-2 text-apple-accent">Donanım & PC Sistemleri</h3>
-              <p class="text-sm text-white/60">Üst düzey masaüstü PC donanımları, performans optimizasyonu ve sistem bileşenleri.</p>
-            </div>
-
-            <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/10">
-              <h3 class="text-white font-medium text-sm uppercase tracking-wider mb-2 text-apple-accent">Vibe Coding & Claude Code</h3>
-              <p class="text-sm text-white/60">Yoğun Claude Code kullanımı ve yapay zeka destekli hızlı, pürüzsüz kodlama akışı.</p>
-            </div>
-          </div>
-        `
+        body: `<p>Yazılım, donanım, AI...</p>`
       },
       school: {
         title: "Eğitim",
         icon: "graduation-cap",
-        body: `
-          <div class="p-5 rounded-2xl bg-white/[0.03] border border-white/10">
-            <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-apple-accent/20 text-apple-accent border border-apple-accent/30">Mevcut Durum</span>
-            <h3 class="text-xl font-semibold text-white mt-3">11. Sınıf Bilişim Teknolojileri</h3>
-            <p class="mt-2 text-sm text-white/60">
-              Bilişim Teknolojileri alanında lise eğitimime devam etmekteyim. Okul müfredatını kişisel yazılım projelerim, yapay zeka araçları ve donanım tecrübemle harmanlayarak geleceğe hazırlanıyorum.
-            </p>
-          </div>
-        `
+        body: `<p>11. sınıf bilişim...</p>`
       },
       contact: {
         title: "İletişim",
         icon: "phone",
-        body: `
-          <p class="mb-6 text-sm text-white/60">
-            Benimle iletişime geçmek, projeler üzerine konuşmak veya soru sormak için aşağıdaki kanalı kullanabilirsiniz:
-          </p>
-          
-          <div onclick="copyPhone('+90 541 355 1927')" class="group cursor-pointer p-4 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-apple-accent/50 hover:bg-apple-accent/5 transition-all flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-              <div class="p-2.5 rounded-xl bg-white/10 group-hover:bg-apple-accent group-hover:text-black transition-colors">
-                <i data-lucide="phone-call" class="w-5 h-5"></i>
-              </div>
-              <div>
-                <span class="text-xs text-white/40 block">Telefon / WhatsApp</span>
-                <span class="text-base font-mono text-white font-medium">+90 541 355 1927</span>
-              </div>
-            </div>
-            <i data-lucide="copy" class="w-5 h-5 text-white/30 group-hover:text-apple-accent transition-colors"></i>
-          </div>
-        `
+        body: `<p>Telefon: ...</p>`
       }
     };
 
-    window.addEventListener('mousemove', (e) => {
-      const glow = document.getElementById('ambient-glow');
-      glow.style.setProperty('--mouse-x', `${e.clientX}px`);
-      glow.style.setProperty('--mouse-y', `${e.clientY}px`);
-      glow.classList.remove('opacity-0');
+    window.addEventListener("mousemove", (e) => {
+      const glow = document.getElementById("ambient-glow");
+      glow.style.setProperty("--mouse-x", e.clientX + "px");
+      glow.style.setProperty("--mouse-y", e.clientY + "px");
+      glow.style.opacity = "1";
     });
 
     function openModal(id) {
       const data = contentData[id];
-      if (!data) return;
 
-      document.getElementById('modal-title').innerText = data.title;
-      document.getElementById('modal-body').innerHTML = data.body;
-      
-      const iconWrapper = document.getElementById('modal-icon-wrapper');
-      iconWrapper.innerHTML = `<i data-lucide="${data.icon}" class="w-6 h-6"></i>`;
+      document.getElementById("modal-title").innerText = data.title;
+      document.getElementById("modal-body").innerHTML = data.body;
 
-      const overlay = document.getElementById('modal-overlay');
-      const card = document.getElementById('modal-card');
+      document.getElementById("modal-icon-wrapper").innerHTML =
+        `<i data-lucide="${data.icon}"></i>`;
 
-      overlay.classList.remove('opacity-0', 'pointer-events-none');
-      card.classList.remove('scale-90', 'opacity-0');
-      card.classList.add('scale-100', 'opacity-100');
+      document.getElementById("modal-overlay").classList.add("active");
+      document.getElementById("modal-card").classList.add("active");
 
       lucide.createIcons();
     }
 
     function closeModal() {
-      const overlay = document.getElementById('modal-overlay');
-      const card = document.getElementById('modal-card');
-
-      card.classList.remove('scale-100', 'opacity-100');
-      card.classList.add('scale-90', 'opacity-0');
-
-      setTimeout(() => {
-        overlay.classList.add('opacity-0', 'pointer-events-none');
-      }, 200);
+      document.getElementById("modal-overlay").classList.remove("active");
+      document.getElementById("modal-card").classList.remove("active");
     }
-
-    function copyPhone(text) {
-      navigator.clipboard.writeText(text);
-      const toast = document.getElementById('toast');
-      toast.classList.remove('opacity-0', 'pointer-events-none');
-      toast.classList.add('opacity-100');
-
-      setTimeout(() => {
-        toast.classList.remove('opacity-100');
-        toast.classList.add('opacity-0', 'pointer-events-none');
-      }, 2500);
-    }
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeModal();
-    });
   </script>
+
 </body>
 </html>
