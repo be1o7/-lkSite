@@ -21,7 +21,7 @@
 
       <div class="profile-wrapper">
         <div class="profile-glow"></div>
-        <img src="manifestyaa.JPEG" alt="Berkay Yılmaz" class="profile-img">
+        <img src="manifestyaa.JPEG" class="profile-img">
       </div>
 
       <div class="status-badge">
@@ -30,10 +30,7 @@
       </div>
 
       <h1 class="title">Berkay Yılmaz</h1>
-      <p class="subtitle">
-        Donanım, yazılım ve yapay zeka araçlarıyla dijital deneyimler inşa ediyorum.
-      </p>
-
+      <p class="subtitle">Donanım, yazılım ve AI ile üretim.</p>
     </header>
 
     <section class="grid">
@@ -41,123 +38,110 @@
       <button onclick="openModal('about')" class="card">
         <div class="card-left">
           <div class="icon-box"><i data-lucide="user"></i></div>
-          <div class="card-text">
+          <div>
             <h2>Hakkımda</h2>
-            <p>Vizyonum ve çalışma tutkum</p>
+            <p>Vizyonum</p>
           </div>
         </div>
-        <i data-lucide="chevron-right" class="arrow-icon"></i>
+        <i data-lucide="chevron-right"></i>
       </button>
 
       <button onclick="openModal('skills')" class="card">
         <div class="card-left">
           <div class="icon-box"><i data-lucide="cpu"></i></div>
-          <div class="card-text">
+          <div>
             <h2>Yetenekler</h2>
-            <p>Yazılım, PC & AI</p>
+            <p>Yazılım & AI</p>
           </div>
         </div>
-        <i data-lucide="chevron-right" class="arrow-icon"></i>
+        <i data-lucide="chevron-right"></i>
       </button>
 
       <button onclick="openModal('school')" class="card">
         <div class="card-left">
           <div class="icon-box"><i data-lucide="graduation-cap"></i></div>
-          <div class="card-text">
+          <div>
             <h2>Eğitim</h2>
-            <p>11. Sınıf Bilişim</p>
+            <p>11. sınıf</p>
           </div>
         </div>
-        <i data-lucide="chevron-right" class="arrow-icon"></i>
+        <i data-lucide="chevron-right"></i>
       </button>
 
       <button onclick="openModal('contact')" class="card">
         <div class="card-left">
           <div class="icon-box"><i data-lucide="phone"></i></div>
-          <div class="card-text">
+          <div>
             <h2>İletişim</h2>
-            <p>Doğrudan bağlantı</p>
+            <p>Bağlantı kur</p>
           </div>
         </div>
-        <i data-lucide="chevron-right" class="arrow-icon"></i>
+        <i data-lucide="chevron-right"></i>
       </button>
 
     </section>
   </main>
 
-  <div id="modal-overlay" class="modal-overlay">
-    <div id="modal-card" class="modal-card">
-      <button onclick="closeModal()" class="close-btn">
+  <!-- MODAL -->
+  <div id="modal-overlay" class="modal-overlay" onclick="closeModal()">
+    <div id="modal-card" class="modal-card" onclick="event.stopPropagation()">
+
+      <button class="close-btn" onclick="closeModal()">
         <i data-lucide="x"></i>
       </button>
 
       <div class="modal-header">
-        <div id="modal-icon-wrapper" class="modal-icon"></div>
+        <div id="modal-icon-wrapper"></div>
         <h2 id="modal-title"></h2>
       </div>
 
-      <div id="modal-body" class="modal-body"></div>
+      <div id="modal-body"></div>
+
     </div>
   </div>
 
   <div id="toast" class="toast">
-    <i data-lucide="check-circle-2"></i>
-    <span>Kopyalandı!</span>
+    <i data-lucide="check"></i>
+    Kopyalandı
   </div>
 
-  <script>
-    lucide.createIcons();
+<script>
+lucide.createIcons();
 
-    const contentData = {
-      about: {
-        title: "Hakkımda",
-        icon: "user",
-        body: `<p>Ben Berkay Yılmaz...</p>`
-      },
-      skills: {
-        title: "Yetenekler",
-        icon: "cpu",
-        body: `<p>Yazılım, donanım, AI...</p>`
-      },
-      school: {
-        title: "Eğitim",
-        icon: "graduation-cap",
-        body: `<p>11. sınıf bilişim...</p>`
-      },
-      contact: {
-        title: "İletişim",
-        icon: "phone",
-        body: `<p>Telefon: ...</p>`
-      }
-    };
+const contentData = {
+  about: { title:"Hakkımda", icon:"user", body:"<p>Ben Berkay...</p>" },
+  skills:{ title:"Yetenekler", icon:"cpu", body:"<p>Yazılım & AI</p>" },
+  school:{ title:"Eğitim", icon:"graduation-cap", body:"<p>11. sınıf</p>" },
+  contact:{ title:"İletişim", icon:"phone", body:"<p>Telefon</p>" }
+};
 
-    window.addEventListener("mousemove", (e) => {
-      const glow = document.getElementById("ambient-glow");
-      glow.style.setProperty("--mouse-x", e.clientX + "px");
-      glow.style.setProperty("--mouse-y", e.clientY + "px");
-      glow.style.opacity = "1";
-    });
+window.addEventListener("mousemove",(e)=>{
+  const glow=document.getElementById("ambient-glow");
+  glow.style.setProperty("--mouse-x",e.clientX+"px");
+  glow.style.setProperty("--mouse-y",e.clientY+"px");
+  glow.style.opacity="1";
+});
 
-    function openModal(id) {
-      const data = contentData[id];
+function openModal(id){
+  const d=contentData[id];
 
-      document.getElementById("modal-title").innerText = data.title;
-      document.getElementById("modal-body").innerHTML = data.body;
+  document.getElementById("modal-title").innerText=d.title;
+  document.getElementById("modal-body").innerHTML=d.body;
 
-      document.getElementById("modal-icon-wrapper").innerHTML =
-        `<i data-lucide="${data.icon}"></i>`;
+  document.getElementById("modal-icon-wrapper").innerHTML=
+    `<i data-lucide="${d.icon}"></i>`;
 
-      document.getElementById("modal-overlay").classList.add("active");
-      document.getElementById("modal-card").classList.add("active");
+  document.getElementById("modal-overlay").classList.add("active");
+  document.getElementById("modal-card").classList.add("active");
 
-      lucide.createIcons();
-    }
+  lucide.createIcons();
+}
 
-    function closeModal() {
-      document.getElementById("modal-overlay").classList.remove("active");
-      document.getElementById("modal-card").classList.remove("active");
-    }
-  </script>
+function closeModal(){
+  document.getElementById("modal-overlay").classList.remove("active");
+  document.getElementById("modal-card").classList.remove("active");
+}
+</script>
 
 </body>
 </html>
