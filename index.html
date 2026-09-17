@@ -11,15 +11,12 @@
 
 <body>
 
-  <!-- BACKGROUND -->
   <div id="ambient-glow" class="mouse-glow"></div>
   <div class="bg-orb orb-1"></div>
   <div class="bg-orb orb-2"></div>
 
-  <!-- MAIN -->
   <main class="container">
 
-    <!-- HERO -->
     <header class="hero">
 
       <div class="profile-wrapper">
@@ -39,7 +36,6 @@
 
     </header>
 
-    <!-- CARDS -->
     <section class="grid">
 
       <button class="card" onclick="openModal('about')">
@@ -108,7 +104,6 @@
     </div>
   </div>
 
-  <!-- SCRIPT -->
   <script>
     lucide.createIcons();
 
@@ -118,24 +113,42 @@
         icon: "user",
         body: `<p>Ben Berkay Yılmaz. Yazılım ve donanım ile ilgileniyorum.</p>`
       },
+
       skills: {
         title: "Yetenekler",
         icon: "cpu",
         body: `<p>JavaScript, HTML, CSS, AI araçları ve PC sistemleri.</p>`
       },
+
       school: {
         title: "Eğitim",
         icon: "graduation-cap",
         body: `<p>11. sınıf Bilişim Teknolojileri öğrencisiyim.</p>`
       },
+
       contact: {
         title: "İletişim",
         icon: "phone",
-        body: `<p>Telefon / WhatsApp üzerinden ulaşabilirsiniz.</p>`
+        body: `
+          <p style="margin-bottom:12px;">
+            Bana ulaşmak için:
+          </p>
+
+          <div style="
+            padding:16px;
+            border-radius:16px;
+            background:rgba(255,255,255,0.04);
+            border:1px solid rgba(255,255,255,0.1);
+            font-family:monospace;
+            font-size:16px;
+            color:#fff;
+          ">
+            +90 541 355 1927
+          </div>
+        `
       }
     };
 
-    // mouse glow
     window.addEventListener("mousemove", (e) => {
       const glow = document.getElementById("ambient-glow");
       glow.style.setProperty("--mouse-x", e.clientX + "px");
