@@ -11,17 +11,20 @@
 
 <body>
 
+  <!-- BACKGROUND -->
   <div id="ambient-glow" class="mouse-glow"></div>
   <div class="bg-orb orb-1"></div>
   <div class="bg-orb orb-2"></div>
 
+  <!-- MAIN -->
   <main class="container">
 
+    <!-- HERO -->
     <header class="hero">
 
       <div class="profile-wrapper">
         <div class="profile-glow"></div>
-        <img src="manifestyaa.JPEG" class="profile-img">
+        <img src="manifestyaa.JPEG" class="profile-img" alt="Berkay Yılmaz">
       </div>
 
       <div class="status-badge">
@@ -30,23 +33,27 @@
       </div>
 
       <h1 class="title">Berkay Yılmaz</h1>
-      <p class="subtitle">Donanım, yazılım ve AI ile üretim.</p>
+      <p class="subtitle">
+        Donanım, yazılım ve yapay zeka araçlarıyla dijital deneyimler üretiyorum.
+      </p>
+
     </header>
 
+    <!-- CARDS -->
     <section class="grid">
 
-      <button onclick="openModal('about')" class="card">
+      <button class="card" onclick="openModal('about')">
         <div class="card-left">
           <div class="icon-box"><i data-lucide="user"></i></div>
           <div>
             <h2>Hakkımda</h2>
-            <p>Vizyonum</p>
+            <p>Vizyonum ve hedeflerim</p>
           </div>
         </div>
         <i data-lucide="chevron-right"></i>
       </button>
 
-      <button onclick="openModal('skills')" class="card">
+      <button class="card" onclick="openModal('skills')">
         <div class="card-left">
           <div class="icon-box"><i data-lucide="cpu"></i></div>
           <div>
@@ -57,18 +64,18 @@
         <i data-lucide="chevron-right"></i>
       </button>
 
-      <button onclick="openModal('school')" class="card">
+      <button class="card" onclick="openModal('school')">
         <div class="card-left">
           <div class="icon-box"><i data-lucide="graduation-cap"></i></div>
           <div>
             <h2>Eğitim</h2>
-            <p>11. sınıf</p>
+            <p>11. sınıf bilişim</p>
           </div>
         </div>
         <i data-lucide="chevron-right"></i>
       </button>
 
-      <button onclick="openModal('contact')" class="card">
+      <button class="card" onclick="openModal('contact')">
         <div class="card-left">
           <div class="icon-box"><i data-lucide="phone"></i></div>
           <div>
@@ -80,11 +87,12 @@
       </button>
 
     </section>
+
   </main>
 
   <!-- MODAL -->
   <div id="modal-overlay" class="modal-overlay" onclick="closeModal()">
-    <div id="modal-card" class="modal-card" onclick="event.stopPropagation()">
+    <div class="modal-card" onclick="event.stopPropagation()">
 
       <button class="close-btn" onclick="closeModal()">
         <i data-lucide="x"></i>
@@ -100,48 +108,63 @@
     </div>
   </div>
 
-  <div id="toast" class="toast">
-    <i data-lucide="check"></i>
-    Kopyalandı
-  </div>
+  <!-- SCRIPT -->
+  <script>
+    lucide.createIcons();
 
-<script>
-lucide.createIcons();
+    const contentData = {
+      about: {
+        title: "Hakkımda",
+        icon: "user",
+        body: `<p>Ben Berkay Yılmaz. Yazılım ve donanım ile ilgileniyorum.</p>`
+      },
+      skills: {
+        title: "Yetenekler",
+        icon: "cpu",
+        body: `<p>JavaScript, HTML, CSS, AI araçları ve PC sistemleri.</p>`
+      },
+      school: {
+        title: "Eğitim",
+        icon: "graduation-cap",
+        body: `<p>11. sınıf Bilişim Teknolojileri öğrencisiyim.</p>`
+      },
+      contact: {
+        title: "İletişim",
+        icon: "phone",
+        body: `<p>Telefon / WhatsApp üzerinden ulaşabilirsiniz.</p>`
+      }
+    };
 
-const contentData = {
-  about: { title:"Hakkımda", icon:"user", body:"<p>Ben Berkay...</p>" },
-  skills:{ title:"Yetenekler", icon:"cpu", body:"<p>Yazılım & AI</p>" },
-  school:{ title:"Eğitim", icon:"graduation-cap", body:"<p>11. sınıf</p>" },
-  contact:{ title:"İletişim", icon:"phone", body:"<p>Telefon</p>" }
-};
+    // mouse glow
+    window.addEventListener("mousemove", (e) => {
+      const glow = document.getElementById("ambient-glow");
+      glow.style.setProperty("--mouse-x", e.clientX + "px");
+      glow.style.setProperty("--mouse-y", e.clientY + "px");
+      glow.style.opacity = "1";
+    });
 
-window.addEventListener("mousemove",(e)=>{
-  const glow=document.getElementById("ambient-glow");
-  glow.style.setProperty("--mouse-x",e.clientX+"px");
-  glow.style.setProperty("--mouse-y",e.clientY+"px");
-  glow.style.opacity="1";
-});
+    function openModal(id) {
+      const data = contentData[id];
 
-function openModal(id){
-  const d=contentData[id];
+      document.getElementById("modal-title").innerText = data.title;
+      document.getElementById("modal-body").innerHTML = data.body;
 
-  document.getElementById("modal-title").innerText=d.title;
-  document.getElementById("modal-body").innerHTML=d.body;
+      document.getElementById("modal-icon-wrapper").innerHTML =
+        `<i data-lucide="${data.icon}"></i>`;
 
-  document.getElementById("modal-icon-wrapper").innerHTML=
-    `<i data-lucide="${d.icon}"></i>`;
+      document.getElementById("modal-overlay").classList.add("active");
 
-  document.getElementById("modal-overlay").classList.add("active");
-  document.getElementById("modal-card").classList.add("active");
+      lucide.createIcons();
+    }
 
-  lucide.createIcons();
-}
+    function closeModal() {
+      document.getElementById("modal-overlay").classList.remove("active");
+    }
 
-function closeModal(){
-  document.getElementById("modal-overlay").classList.remove("active");
-  document.getElementById("modal-card").classList.remove("active");
-}
-</script>
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeModal();
+    });
+  </script>
 
 </body>
 </html>
